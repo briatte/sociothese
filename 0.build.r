@@ -43,7 +43,7 @@ file.copy(copy, paste0("figs_full/", copy), overwrite = TRUE)
 # clean up
 #
 
-file.remove(dir(pattern = "fig_"))
+file.remove(dir(pattern = "fig_|Rplot"))
 clear(list = ls())
 
 ## kthxbye
