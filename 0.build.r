@@ -1,10 +1,10 @@
-
 ## let's go
 
 rm(list = ls())
+options(verbose = TRUE)
 
 #
-# quick example
+# quick example (needs an hour to run)
 #
 
 keyword = "relig" # subset corpus to grep match
@@ -12,21 +12,21 @@ training = FALSE  # subset to a smaller training set
 k = 50            # number of topics to model
 SEED = 3740       # random seed for LDA estimation
 
-# source("1.estimate.r")
+source("1.estimate.r")
 
 threshold = 0.002 # threshold for network plot
 
-# source("2.visualize.r")
+source("2.visualize.r")
 
 n = 100           # diagnose topics from 1 to n
 
-# source("3.diagnose.r")
+source("3.diagnose.r")
 
 copy = dir(pattern = "fig_")
 file.copy(copy, paste0("figs_", keyword, "/", copy), overwrite = TRUE)
 
 #
-# full sample (takes a few hours to run)
+# full sample (needs a day to run)
 #
 
 keyword = ""
@@ -46,4 +46,4 @@ file.copy(copy, paste0("figs_full/", copy), overwrite = TRUE)
 file.remove(dir(pattern = "fig_"))
 clear(list = ls())
 
-## kthxbye; 10.55
+## kthxbye
