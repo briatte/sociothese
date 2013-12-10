@@ -11,7 +11,7 @@ Here's what the topic models for the full sample look like [in network form](htt
 
 Instead of working with a `network` object, you can also turn the result of the `topic.graph` function into a [d3.js object](http://tedunderwood.com/2012/12/02/visualizing-topic-models-with-force-directed-graphs/) with [d3Network](http://cran.r-project.org/web/packages/d3Network/):
 
-```r
+```S
 library(devtools)
 install_github("christophergandrud/d3Network")
 library(d3Network)
