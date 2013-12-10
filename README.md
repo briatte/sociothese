@@ -1,3 +1,5 @@
+A short try at [topic models](http://dx.doi.org/10.1016/j.poetic.2013.10.001) (see [discussion](http://scatter.wordpress.com/2013/12/04/topic-modeling-and-a-theory-of-language/)).
+
 Run [`0.build.r`](0.build.r) from the `sociothese` folder to replicate the model and plots. The script sets a few model parameters and estimates LDA models:
 
 1. first on summaries that match the `relig*` keyword: _N_ = 220 (runs in one hour)
