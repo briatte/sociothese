@@ -4,7 +4,7 @@ rm(list = ls())
 options(verbose = TRUE)
 
 #
-# quick example (needs an hour to run)
+# quick example (needs two hours to run)
 #
 
 keyword = "relig" # subset corpus to grep match
@@ -21,12 +21,13 @@ source("2.visualize.r")
 n = 100           # diagnose topics from 1 to n
 
 source("3.diagnose.r")
+source("4.validate.r") # 10-fold cross-validation
 
 copy = dir(pattern = "fig_")
 file.copy(copy, paste0("figs_", keyword, "/", copy), overwrite = TRUE)
 
 #
-# full sample (needs a day to run)
+# full sample (needs a full day to run)
 #
 
 keyword = ""
