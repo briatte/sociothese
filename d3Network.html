@@ -1,0 +1,132 @@
+
+  <!DOCTYPE html> 
+  <meta charset="utf-8">
+  <body> 
+ <style> 
+.link {  
+stroke: #666;
+opacity: 1;
+stroke-width: 1.5px; 
+} 
+.node circle { 
+stroke: #fff; 
+opacity: 1;
+stroke-width: 1.5px; 
+} 
+text { 
+font: 14px serif; 
+opacity: 1;
+pointer-events: none; 
+} 
+</style> 
+
+<script src=http://d3js.org/d3.v3.min.js></script>
+
+<script> 
+ var links = [ { "source" : "control", "target" : "droit" }, { "source" : "droit", "target" : "eglis" }, { "source" : "eglis", "target" : "femm" }, { "source" : "femm", "target" : "ressourc" }, { "source" : "ampleur", "target" : "egypt" }, { "source" : "egypt", "target" : "etang" }, { "source" : "etang", "target" : "fete" }, { "source" : "fete", "target" : "iran" }, { "source" : "cast", "target" : "dalit" }, { "source" : "dalit", "target" : "dalits" }, { "source" : "dalits", "target" : "egalit" }, { "source" : "egalit", "target" : "myth" }, { "source" : "emploi", "target" : "ethiqu" }, { "source" : "ethiqu", "target" : "gout" }, { "source" : "gout", "target" : "pluralit" }, { "source" : "pluralit", "target" : "prefer" }, { "source" : "amish", "target" : "beyrouth" }, { "source" : "beyrouth", "target" : "guerr" }, { "source" : "guerr", "target" : "humoristiqu" }, { "source" : "humoristiqu", "target" : "quotidien" }, { "source" : "albanais", "target" : "corp" }, { "source" : "corp", "target" : "ethniqu" }, { "source" : "ethniqu", "target" : "femm" }, { "source" : "femm", "target" : "jeun" }, { "source" : "angleterr", "target" : "argent" }, { "source" : "argent", "target" : "femm" }, { "source" : "femm", "target" : "foulard" }, { "source" : "foulard", "target" : "musulman" }, { "source" : "antoinism", "target" : "chretienn" }, { "source" : "chretienn", "target" : "croyanc" }, { "source" : "croyanc", "target" : "jeux" }, { "source" : "jeux", "target" : "magi" }, { "source" : "croyant", "target" : "dieu" }, { "source" : "dieu", "target" : "eglis" }, { "source" : "eglis", "target" : "evangeliqu" }, { "source" : "evangeliqu", "target" : "pentecotism" }, { "source" : "absenc", "target" : "assemble" }, { "source" : "assemble", "target" : "eglis" }, { "source" : "eglis", "target" : "jeun" }, { "source" : "jeun", "target" : "metropolitain" }, { "source" : "argentin", "target" : "catholique" }, { "source" : "catholique", "target" : "mort" }, { "source" : "mort", "target" : "pelerinag" }, { "source" : "pelerinag", "target" : "rite" }, { "source" : "corp", "target" : "delivr" }, { "source" : "delivr", "target" : "eglis" }, { "source" : "eglis", "target" : "imaginair" }, { "source" : "imaginair", "target" : "international" }, { "source" : "asseoir", "target" : "basiliqu" }, { "source" : "basiliqu", "target" : "discours" }, { "source" : "discours", "target" : "ethique" }, { "source" : "ethique", "target" : "science" }, { "source" : "corp", "target" : "dominiquai" }, { "source" : "dominiquai", "target" : "guadeloupe" }, { "source" : "guadeloupe", "target" : "nouveaux" }, { "source" : "nouveaux", "target" : "vill" }, { "source" : "animaux", "target" : "crapaud" }, { "source" : "crapaud", "target" : "predict" }, { "source" : "predict", "target" : "religiosit" }, { "source" : "religiosit", "target" : "xoy" }, { "source" : "bamakoi", "target" : "capit" }, { "source" : "capit", "target" : "diplom" }, { "source" : "diplom", "target" : "haiti" }, { "source" : "haiti", "target" : "immigr" }, { "source" : "arab", "target" : "banqu" }, { "source" : "banqu", "target" : "financ" }, { "source" : "financ", "target" : "financi" }, { "source" : "financi", "target" : "islamiqu" }, { "source" : "besoin", "target" : "communic" }, { "source" : "communic", "target" : "justic" }, { "source" : "justic", "target" : "loi" }, { "source" : "loi", "target" : "studi" }, { "source" : "arabe", "target" : "communaut" }, { "source" : "communaut", "target" : "ile" }, { "source" : "ile", "target" : "jerba" }, { "source" : "jerba", "target" : "noir" }, { "source" : "encadr", "target" : "enfant" }, { "source" : "enfant", "target" : "jeun" }, { "source" : "jeun", "target" : "jeuness" }, { "source" : "jeuness", "target" : "parent" }, { "source" : "agrair", "target" : "femm" }, { "source" : "femm", "target" : "maroc" }, { "source" : "maroc", "target" : "marocain" }, { "source" : "marocain", "target" : "sociopolitiqu" }, { "source" : "bail", "target" : "chili" }, { "source" : "chili", "target" : "chine" }, { "source" : "chine", "target" : "chino" }, { "source" : "chino", "target" : "secularis" }, { "source" : "anim", "target" : "corp" }, { "source" : "corp", "target" : "fill" }, { "source" : "fill", "target" : "musulman" }, { "source" : "musulman", "target" : "parol" }, { "source" : "chapitr", "target" : "civile" }, { "source" : "civile", "target" : "contest" }, { "source" : "contest", "target" : "gombrowicz" }, { "source" : "gombrowicz", "target" : "mediat" }, { "source" : "composant", "target" : "enseign" }, { "source" : "enseign", "target" : "portant" }, { "source" : "portant", "target" : "scolair" }, { "source" : "scolair", "target" : "secularis" }, { "source" : "aid", "target" : "arbitrair" }, { "source" : "arbitrair", "target" : "croyanc" }, { "source" : "croyanc", "target" : "enseign" }, { "source" : "enseign", "target" : "public" }, { "source" : "agent", "target" : "agriculteur" }, { "source" : "agriculteur", "target" : "bouddhism" }, { "source" : "bouddhism", "target" : "diffus" }, { "source" : "diffus", "target" : "tibetain" }, { "source" : "ameli", "target" : "curricula" }, { "source" : "curricula", "target" : "enseign" }, { "source" : "enseign", "target" : "nothomb" }, { "source" : "nothomb", "target" : "nucleaire" }, { "source" : "benevol", "target" : "communaut" }, { "source" : "communaut", "target" : "homosexuell" }, { "source" : "homosexuell", "target" : "medecin" }, { "source" : "medecin", "target" : "soignant" }, { "source" : "confreri", "target" : "explic" }, { "source" : "explic", "target" : "notion" }, { "source" : "notion", "target" : "recit" }, { "source" : "recit", "target" : "unit" }, { "source" : "communist", "target" : "ecclesial" }, { "source" : "ecclesial", "target" : "eglis" }, { "source" : "eglis", "target" : "femm" }, { "source" : "femm", "target" : "jusqu" }, { "source" : "ethiqu", "target" : "experi" }, { "source" : "experi", "target" : "individualism" }, { "source" : "individualism", "target" : "jeu" }, { "source" : "jeu", "target" : "period" }, { "source" : "campagn", "target" : "clerg" }, { "source" : "clerg", "target" : "generat" }, { "source" : "generat", "target" : "notion" }, { "source" : "notion", "target" : "public" }, { "source" : "apprendr", "target" : "enfant" }, { "source" : "enfant", "target" : "mendicit" }, { "source" : "mendicit", "target" : "musulman" }, { "source" : "musulman", "target" : "talib" }, { "source" : "chine", "target" : "cremat" }, { "source" : "cremat", "target" : "croyanc" }, { "source" : "croyanc", "target" : "polici" }, { "source" : "polici", "target" : "taiwanai" }, { "source" : "communaut", "target" : "configur" }, { "source" : "configur", "target" : "inclus" }, { "source" : "inclus", "target" : "laicit" }, { "source" : "laicit", "target" : "period" }, { "source" : "alevi", "target" : "art" }, { "source" : "art", "target" : "artistiqu" }, { "source" : "artistiqu", "target" : "caracter" }, { "source" : "caracter", "target" : "jeuness" }, { "source" : "engag", "target" : "entrepris" }, { "source" : "entrepris", "target" : "infirmier" }, { "source" : "infirmier", "target" : "militantism" }, { "source" : "militantism", "target" : "sant" }, { "source" : "basqu", "target" : "etait" }, { "source" : "etait", "target" : "imag" }, { "source" : "imag", "target" : "jeun" }, { "source" : "jeun", "target" : "juiv" }, { "source" : "conjoint", "target" : "coupl" }, { "source" : "coupl", "target" : "interreligieux" }, { "source" : "interreligieux", "target" : "mixit" }, { "source" : "mixit", "target" : "reunion" }, { "source" : "differend", "target" : "droit" }, { "source" : "droit", "target" : "homme" }, { "source" : "homme", "target" : "islamique" }, { "source" : "islamique", "target" : "litige" }, { "source" : "corp", "target" : "don" }, { "source" : "don", "target" : "maux" }, { "source" : "maux", "target" : "medical" }, { "source" : "medical", "target" : "mineur" }, { "source" : "accord", "target" : "denomin" }, { "source" : "denomin", "target" : "father" }, { "source" : "father", "target" : "illus" }, { "source" : "illus", "target" : "monaster" }, { "source" : "algeri", "target" : "controvers" }, { "source" : "controvers", "target" : "elit" }, { "source" : "elit", "target" : "period" }, { "source" : "period", "target" : "statistiqu" }, { "source" : "artist", "target" : "artistes" }, { "source" : "artistes", "target" : "artistiqu" }, { "source" : "artistiqu", "target" : "cult" }, { "source" : "cult", "target" : "vill" }, { "source" : "droit", "target" : "femm" }, { "source" : "femm", "target" : "hindou" }, { "source" : "hindou", "target" : "jeun" }, { "source" : "jeun", "target" : "maghrebin" }, { "source" : "elit", "target" : "immigr" }, { "source" : "immigr", "target" : "jeun" }, { "source" : "jeun", "target" : "turquie" }, { "source" : "turquie", "target" : "villag" }, { "source" : "arab", "target" : "banlieu" }, { "source" : "banlieu", "target" : "laicit" }, { "source" : "laicit", "target" : "langu" }, { "source" : "langu", "target" : "musulman" }, { "source" : "courant", "target" : "detent" }, { "source" : "detent", "target" : "experi" }, { "source" : "experi", "target" : "protestantism" }, { "source" : "protestantism", "target" : "reform" }, { "source" : "afrique", "target" : "kimbanguism" }, { "source" : "kimbanguism", "target" : "kimbanguist" }, { "source" : "kimbanguist", "target" : "plant" }, { "source" : "plant", "target" : "yoruba" } ] ; 
+ var nodes = {}
+
+// Compute the distinct nodes from the links.
+links.forEach(function(link) {
+link.source = nodes[link.source] || 
+(nodes[link.source] = {name: link.source});
+link.target = nodes[link.target] || 
+(nodes[link.target] = {name: link.target});
+link.value = +link.value;
+});
+
+var width = 800
+height = 800;
+
+var force = d3.layout.force() 
+.nodes(d3.values(nodes)) 
+.links(links) 
+.size([width, height]) 
+.linkDistance(50) 
+.charge(-200) 
+.on("tick", tick) 
+.start(); 
+
+var svg = d3.select("body").append("svg") 
+.attr("width", width) 
+.attr("height", height); 
+
+var link = svg.selectAll(".link") 
+.data(force.links()) 
+.enter().append("line") 
+.attr("class", "link"); 
+
+var node = svg.selectAll(".node") 
+.data(force.nodes()) 
+.enter().append("g") 
+.attr("class", "node") 
+.on("mouseover", mouseover) 
+.on("mouseout", mouseout) 
+.on("click", click)
+.on("dblclick", dblclick)
+.call(force.drag); 
+
+node.append("circle") 
+.attr("r", 8)
+.style("fill", "#3182bd");
+
+node.append("text") 
+.attr("x", 12) 
+.attr("dy", ".35em") 
+.style("fill", "#3182bd")
+.text(function(d) { return d.name; }); 
+
+function tick() { 
+link 
+.attr("x1", function(d) { return d.source.x; }) 
+.attr("y1", function(d) { return d.source.y; }) 
+.attr("x2", function(d) { return d.target.x; }) 
+.attr("y2", function(d) { return d.target.y; }); 
+
+node.attr("transform", function(d) { return "translate(" + d.x + "," + d.y + ")"; }); 
+} 
+
+function mouseover() { 
+d3.select(this).select("circle").transition() 
+.duration(750) 
+.attr("r", 16); 
+} 
+
+function mouseout() { 
+d3.select(this).select("circle").transition() 
+.duration(750) 
+.attr("r", 8); 
+} 
+// action to take on mouse click
+function click() {
+d3.select(this).select("text").transition()
+.duration(750)
+.attr("x", 22)
+.style("stroke-width", ".5px")
+.style("opacity", 1)
+.style("fill", "#E34A33")
+.style("font", "35px serif");
+d3.select(this).select("circle").transition()
+.duration(750)
+.style("fill", "#E34A33")
+.attr("r", 16)
+}
+
+// action to take on mouse double click
+function dblclick() {
+d3.select(this).select("circle").transition()
+.duration(750)
+.attr("r", 6)
+.style("fill", "#E34A33");
+d3.select(this).select("text").transition()
+.duration(750)
+.attr("x", 12)
+.style("stroke", "none")
+.style("fill", "#E34A33")
+.style("stroke", "none")
+.style("opacity", 1)
+.style("font", "14px serif");
+}
+
+</script>
+ </body>
