@@ -11,7 +11,8 @@ folding = sample(rep(seq_len(10), ceiling(D))[seq_len(D)])
 
 ## 10-fold cross-validation (Grün and Hornik appendix code)
 
-dir.create("results")
+dir.create(paste0("results", 
+           ifelse(nchar(keyword) > 0, paste0("_", keyword), "")))
 
 for (k in topics) {
   cat("k = ", k, "\n")
@@ -47,7 +48,8 @@ for (k in topics) {
 
 ## plot perplexities of training data for VEM and VEM fixed
 
-setwd("results")
+setwd(paste0("results", 
+      ifelse(nchar(keyword) > 0, paste0("_", keyword), "")))
 
 sims = dir(pattern = "VEM")
 sims = sapply(sims, function(x) {
